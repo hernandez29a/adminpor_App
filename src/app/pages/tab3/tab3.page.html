@@ -1,0 +1,57 @@
+<app-header titulo="Actualizar"></app-header>
+
+<ion-content [fullscreen]="true">
+
+    <ion-row class="ion-text-center">
+        <ion-col>
+            <img (click)="camara()" src="assets/avatars/av-1.png">
+        </ion-col>
+    </ion-row>
+
+    <ion-row>
+        <ion-col size="6">
+            <ion-button expand="full" shape="round" (click)="galeria()">
+                <ion-icon slot="start" name="camera"></ion-icon>
+                Cámara
+            </ion-button>
+        </ion-col>
+        <ion-col size="6">
+            <ion-button expand="full" shape="round" (click)="subirFoto()">
+                <ion-icon slot="start" name="images"></ion-icon>
+                Galerí­a
+            </ion-button>
+        </ion-col>
+    </ion-row>
+
+    <form (ngSubmit)="actualizar( fActualizar.value )" #fActualizar="ngForm">
+        <ion-row>
+            <ion-col>
+
+                <ion-list>
+
+                    <ion-item>
+                        <ion-label>Email</ion-label>
+                        <ion-input [(ngModel)]="usuario.email" class="form-control" name="email" type="email" placeholder="coloque el correo" required></ion-input>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-label>Nombre</ion-label>
+                        <ion-input [(ngModel)]="usuario.nombre" class="form-control" name="nombre" type="text" placeholder="coloque el nombre" required></ion-input>
+                    </ion-item>
+
+                </ion-list>
+            </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-text-center">
+            <ion-col>
+                <ion-button type="submit" color="tertiary" shape="round">
+                    Actualizar usuario
+                </ion-button>
+            </ion-col>
+        </ion-row>
+
+    </form>
+
+
+</ion-content>

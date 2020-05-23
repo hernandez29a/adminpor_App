@@ -1,0 +1,8 @@
+{
+  "name": "invPeyberApp",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular"
+}
