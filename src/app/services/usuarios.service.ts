@@ -8,6 +8,7 @@ import { catchError } from "rxjs/operators";
 import {Observable, throwError} from 'rxjs'
 import { Storage } from '@ionic/storage';
 import { NavController } from '@ionic/angular';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 
 
 const URL_SERVICIOS = environment.URL
@@ -23,7 +24,8 @@ export class UsuariosService {
 
   constructor( private http: HttpClient,
                private storage: Storage,
-               private navCtrl: NavController) { }
+               private navCtrl: NavController,
+               private fileTransfer: FileTransfer) { }
 
                
   login(email: string, password: string){
@@ -113,6 +115,25 @@ export class UsuariosService {
         });
       
     });
+  }
+
+  subirImagen(img:string, id:string = null){
+
+    console.log('la imagen es:',img);
+    console.log( 'el id del usuario es',id);
+    id = this.usuario._id;
+    let url = URL_SERVICIOS + '/upload/usuarios/' + id;
+    const options: FileUploadOptions = {
+      fileKey: 'imagen' 
+    }
+
+    const filetranfer: FileTransferObject = this.fileTransfer.create();
+    filetranfer.upload(img,url, options )
+      .then( data => {
+        console.log(data);
+      }).catch( err => {
+        console.log('error en carga' , err);
+      });
   }
 
 

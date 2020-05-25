@@ -3,6 +3,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Usuario } from 'src/app/interfaces/interfaces';
 import { UsuariosService } from '../../services/usuarios.service';
 import { NgForm } from '@angular/forms';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 
 declare var window:any;
 
@@ -13,11 +14,12 @@ declare var window:any;
 })
 export class Tab3Page implements OnInit {
 
-  tempImages:string[] = [];
+  imagenTemp:string;
   usuario:Usuario = {};
 
   constructor( private camera: Camera,
-               private _usuarioService: UsuariosService) {}
+               private _usuarioService: UsuariosService,
+               private fileTransfer: FileTransfer) {}
 
   ngOnInit(){
     this.usuario = this._usuarioService.getUsuario();
@@ -25,6 +27,7 @@ export class Tab3Page implements OnInit {
   }
 
   camara(){
+    console.log('click en la camara');
     const options: CameraOptions = {
       quality: 60,
       destinationType: this.camera.DestinationType.FILE_URI,
@@ -37,6 +40,8 @@ export class Tab3Page implements OnInit {
   }
 
   procesarImagen(options: CameraOptions){
+    
+
     this.camera.getPicture(options).then(( imageData ) => {
       // imageData is either a base64 encoded string or a file URI
       // If it's base64 (DATA_URL):
@@ -44,9 +49,11 @@ export class Tab3Page implements OnInit {
       const img = window.Ionic.WebView.convertFileSrc( imageData );
 
       //insertamos la imagen en el aarreglo
-      //this.postService.subirImagen(imageData);
-      this.tempImages.push(img);
+      this._usuarioService.subirImagen(imageData);
+      this.imagenTemp = img;
       console.log('imagen', img);
+      return img;
+      
      }, (err) => {
       // Handle error
       console.log(err);
@@ -65,9 +72,7 @@ export class Tab3Page implements OnInit {
     this.procesarImagen(options);
   }
 
-  subirFoto(){
 
-  }
 
   actualizar(usuario:Usuario){
 

@@ -4,24 +4,31 @@
 
     <ion-row class="ion-text-center">
         <ion-col>
-            <img (click)="camara()" src="assets/avatars/av-1.png">
+            <img class="img-50" *ngIf="!imagenTemp" [src]="usuario.img| imagen">
+            <img class="img-50" *ngIf="imagenTemp" [src]="imagenTemp" class="w150">
+            <!--<img src="assets/avatars/av-1.png"> -->
         </ion-col>
+
+
     </ion-row>
 
     <ion-row>
         <ion-col size="6">
-            <ion-button expand="full" shape="round" (click)="galeria()">
+            <ion-button expand="full" shape="round" (click)="camara()">
                 <ion-icon slot="start" name="camera"></ion-icon>
                 Cámara
             </ion-button>
         </ion-col>
+
+
         <ion-col size="6">
-            <ion-button expand="full" shape="round" (click)="subirFoto()">
-                <ion-icon slot="start" name="images"></ion-icon>
-                Galerí­a
+            <ion-button expand="full" shape="round" (click)="galeria()">
+                <ion-icon slot="start" name="camera"></ion-icon>
+                Galeria
             </ion-button>
         </ion-col>
     </ion-row>
+
 
     <form (ngSubmit)="actualizar( fActualizar.value )" #fActualizar="ngForm">
         <ion-row>
@@ -36,7 +43,7 @@
 
                     <ion-item>
                         <ion-label>Nombre</ion-label>
-                        <ion-input [(ngModel)]="usuario.nombre" class="form-control" name="nombre" type="text" placeholder="coloque el nombre" required></ion-input>
+                        <ion-input [(ngModel)]="usuario.nombre" [disabled]="usuario.google" class="form-control" name="nombre" type="text" placeholder="coloque el nombre" required></ion-input>
                     </ion-item>
 
                 </ion-list>
