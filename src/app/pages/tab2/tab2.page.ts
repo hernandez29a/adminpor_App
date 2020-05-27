@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UsuariosService } from '../../services/usuarios.service';
 import { Usuario } from 'src/app/interfaces/interfaces';
-import { IonList } from '@ionic/angular';
+import { IonList, ModalController } from '@ionic/angular';
 import Swal from 'sweetalert2';
+import { async } from '@angular/core/testing';
+import { DetalleUsuarioComponent } from '../../componentes/usuario/detalle-usuario/detalle-usuario.component';
 
 @Component({
   selector: 'app-tab2',
@@ -19,7 +21,8 @@ export class Tab2Page implements OnInit {
   @ViewChild('lista', {static:false}) lista: IonList;
 
 
-  constructor(private _usuarioService: UsuariosService) {}
+  constructor(private _usuarioService: UsuariosService,
+              private modalCtrl: ModalController) {}
 
   ngOnInit(){
     //this.cargarUsuarios();
@@ -84,19 +87,33 @@ export class Tab2Page implements OnInit {
 
   }
 
-  verUsuario(usuario){
+  async verUsuario(usuario:Usuario){
+    //console.log(usuario);
 
+    const modal = await this.modalCtrl.create({
+      component: DetalleUsuarioComponent,
+      componentProps:{
+        usuario
+      }
+    });
+
+    modal.present();
   }
 
-  actualizarUsuario(usuario:Usuario){
+  async actualizarUsuario(usuario:Usuario){
     this.lista.closeSlidingItems();
     console.log(usuario);
+
+    this._usuarioService.actualizarUsuario(usuario)
+    .subscribe();
+
   }
 
   eliminarUsuario(usuario:Usuario){
-    console.log(usuario);
+    //console.log(usuario);
     if(usuario._id === this._usuarioService.usuario._id){
       Swal.fire({ title: 'No puede borrar usuario', text: 'No se puede borrar a si mismo', icon: 'error' });
+      this.lista.closeSlidingItems();
       return;
     }
 
@@ -118,7 +135,8 @@ export class Tab2Page implements OnInit {
           //console.log(borrado);
           this.cargarUsuarios();
         });
- 
+        
+        
       } else if ( borrar.dismiss === Swal.DismissReason.cancel ) {
         Swal.fire('Cancelado', 'Tranquilo no se ha borrado nada!!', 'error');
         this.lista.closeSlidingItems();

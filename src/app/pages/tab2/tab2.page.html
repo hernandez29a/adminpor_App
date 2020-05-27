@@ -25,7 +25,17 @@
 
             <ion-item line="none">
                 <img (click)="subirFoto()" class="img" [src]="usuario.img| imagen" alt="" class="img-50 img-circle">
-                <ion-label (click)="verUsuario(usuario)" class="ion-text-left">{{usuario.nombre}}</ion-label>
+                <ion-label (click)="verUsuario(usuario)" *ngIf="usuario.role === 'ADMIN_ROLE'" class="ion-text-right">Admin</ion-label>
+                <ion-label (click)="verUsuario(usuario)" *ngIf="usuario.role === 'USER_ROLE'" class="ion-text-right">Regular</ion-label>
+                <!--<ion-label (click)="verUsuario(usuario)" class="ion-text-left">{{usuario.nombre}}</ion-label> -->
+
+                <ion-item side="end">
+                    <select [(ngModel)]="usuario.role" name="role" class="form-control">
+                        <option value="ADMIN_ROLE">Admin</option>
+                        <option value="USER_ROLE">Regular</option>
+                    </select>
+
+                </ion-item>
             </ion-item>
 
             <ion-item-options side="start" class="boton_izq">
