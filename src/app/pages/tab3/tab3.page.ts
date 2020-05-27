@@ -23,7 +23,7 @@ export class Tab3Page implements OnInit {
 
   ngOnInit(){
     this.usuario = this._usuarioService.getUsuario();
-    console.log(this.usuario);
+    //console.log(this.usuario);
   }
 
   camara(){
@@ -51,7 +51,7 @@ export class Tab3Page implements OnInit {
       //insertamos la imagen en el aarreglo
       this._usuarioService.subirImagen(imageData);
       this.imagenTemp = img;
-      console.log('imagen', img);
+     // console.log('imagen', img);
       return img;
       
      }, (err) => {

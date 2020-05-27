@@ -18,7 +18,7 @@ const URL_SERVICIOS = environment.URL
 })
 export class UsuariosService {
 
-  private usuario:Usuario = {};
+  usuario:Usuario = {};
   token:string = null;
   meny:any = [];
 
@@ -38,7 +38,7 @@ export class UsuariosService {
       map((resp: any) => {
         
        // this.guardarStorage( resp.id, resp.token, resp.usuario , resp.menu );
-      console.log(resp);
+      //console.log(resp);
         
       if( resp['ok']){
         this.guardatToken( resp['token'])
@@ -73,6 +73,15 @@ export class UsuariosService {
     }
 
     return{...this.usuario};
+  }
+
+  obtenerRol(){
+    let url = URL_SERVICIOS + '/usuario/usuario';
+      url += '?token=' + this.token;
+
+      return this.http.get(url );
+     
+        
   }
 
   async guardatToken( token:string){
@@ -227,5 +236,20 @@ export class UsuariosService {
   //=============================
   //Eliminar usuario
   //=============================
+  borrarUsuario(id: string){
+
+    let url = URL_SERVICIOS + '/usuario/' + id;
+    url += '?token=' + this.token;
+    return this.http.delete(url)
+    .pipe(
+      map(resp => {
+        Swal.fire({ title: 'Usuario Borrado', text: 'El usuario ha sido elimnado correctamente', icon: 'success' });
+        return true;
+      })
+    );
+
+
+
+  }
 
 }

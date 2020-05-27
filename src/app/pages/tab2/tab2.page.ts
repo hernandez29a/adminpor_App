@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UsuariosService } from '../../services/usuarios.service';
 import { Usuario } from 'src/app/interfaces/interfaces';
+import { IonList } from '@ionic/angular';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-tab2',
@@ -13,6 +15,8 @@ export class Tab2Page implements OnInit {
   totalRegistros : number = 0;
   cargando:boolean = true
   usuarios:Usuario[] = [];
+
+  @ViewChild('lista', {static:false}) lista: IonList;
 
 
   constructor(private _usuarioService: UsuariosService) {}
@@ -84,12 +88,43 @@ export class Tab2Page implements OnInit {
 
   }
 
-  actualizarUsuario(usuario){
-
+  actualizarUsuario(usuario:Usuario){
+    this.lista.closeSlidingItems();
+    console.log(usuario);
   }
 
-  eliminarUsuario(usuario){
+  eliminarUsuario(usuario:Usuario){
+    console.log(usuario);
+    if(usuario._id === this._usuarioService.usuario._id){
+      Swal.fire({ title: 'No puede borrar usuario', text: 'No se puede borrar a si mismo', icon: 'error' });
+      return;
+    }
 
+    Swal.fire({
+      title: '¿Esta seguro?',
+      text: 'Esta a punto de borrar a ' + usuario.nombre,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, borralo',
+      cancelButtonText: 'No, cancela',
+      reverseButtons: true
+    })
+    .then( borrar => {
+ 
+      if ( borrar.value ) {
+        this._usuarioService.borrarUsuario( usuario._id ).subscribe( borrado => {
+          //console.log(borrado);
+          this.cargarUsuarios();
+        });
+ 
+      } else if ( borrar.dismiss === Swal.DismissReason.cancel ) {
+        Swal.fire('Cancelado', 'Tranquilo no se ha borrado nada!!', 'error');
+        this.lista.closeSlidingItems();
+      }
+ 
+    });
   }
 
   crearUsuario(){
