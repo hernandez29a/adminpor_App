@@ -1,0 +1,28 @@
+<ion-content>
+
+    <ion-label class="ion-text-center">
+        <h1 class="bajarTitulo">
+            <ion-text color="dark">{{hospital.nombre}}</ion-text>
+        </h1>
+    </ion-label>
+
+    <ion-row class="ion-text-center">
+        <ion-col>
+            <img [src]="hospital.img| imagen:'hospital'">
+        </ion-col>
+    </ion-row>
+
+</ion-content>
+
+<ion-footer class="ion-no-border">
+    <ion-toolbar>
+
+        <ion-buttons slot="start">
+            <ion-button (click)="regresar()">
+                <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
+                <ion-label>Regresar</ion-label>
+            </ion-button>
+        </ion-buttons>
+
+    </ion-toolbar>
+</ion-footer>

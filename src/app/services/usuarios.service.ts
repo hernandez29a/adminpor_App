@@ -9,6 +9,7 @@ import {Observable, throwError} from 'rxjs'
 import { Storage } from '@ionic/storage';
 import { NavController } from '@ionic/angular';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
+import { async } from 'rxjs/internal/scheduler/async';
 
 
 const URL_SERVICIOS = environment.URL
@@ -27,7 +28,31 @@ export class UsuariosService {
                private navCtrl: NavController,
                private fileTransfer: FileTransfer) { }
 
+   renuevaToken(){
+    let url = URL_SERVICIOS + '/login/renuevatoken';
+    url += '?token=' + this.token;
+
+    return this.http.get(url)
+    .pipe(
+      map(  (resp: any) => {
+        this.token = resp.token;
+        //localStorage.setItem('token', this.token);
+        this.storage.set('token', this.token);
+        console.log('token renovado');
+
+        return true;
+      }),
+      catchError(err => {
+        //console.log('Error que viene del servidor', err.error.mensaje);
+        //this.router.navigate(['/login']);
+        this.navCtrl.navigateRoot('/login', {animated: true});
+        Swal.fire({ title: 'No se pudo renovar el token', text: 'No fue posible renovar el token', icon: 'error' });
+        return throwError(err.message);
+      })
+    );
+  }
                
+
   login(email: string, password: string){
     const data = {email,password};
     
@@ -145,9 +170,7 @@ export class UsuariosService {
       });
   }
 
-
-
-   //============================================================================
+  //============================================================================
   //Operaciones del crud 
   //============================================================================
 
@@ -161,7 +184,7 @@ export class UsuariosService {
     return this.http.get<RespuestaUsuarios>(url);
             
   }
-   //=============================
+  //=============================
   //Crear usuario
   //=============================
   crearUsuario(usuario:Usuario){
@@ -220,7 +243,7 @@ export class UsuariosService {
 
 
 
-   //=============================
+  //=============================
   //Buscar usuario
   //=============================
   buscarUsuarios( termino: string){

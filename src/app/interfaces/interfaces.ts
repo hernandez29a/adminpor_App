@@ -14,3 +14,16 @@ export interface Usuario {
     img?: string;
     password?: string;
   }
+
+  export interface RespuestaHospitales {
+    ok: boolean;
+    hospitales: Hospital[];
+    total: number;
+  }
+  
+  export interface Hospital {
+    _id?: string;
+    nombre?: string;
+    usuario?: Usuario;
+    img?: string;
+  }

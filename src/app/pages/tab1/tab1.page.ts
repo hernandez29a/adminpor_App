@@ -18,7 +18,17 @@ export class Tab1Page implements OnInit {
     icon:'wallet',
     name: 'Perfil',
     redirecto:'/main/tabs/tab3'
-    }
+    },
+    {
+    icon:'wallet',
+    name: 'Hospitales',
+    redirecto:'/main/tabs/hospitales'
+    },
+    {
+      icon:'wallet',
+      name: 'Medicos',
+      redirecto:'/main/tabs/medicos'
+      }
   ];
 
   usuario: Usuario = {};

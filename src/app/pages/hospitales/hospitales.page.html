@@ -1,9 +1,9 @@
-<app-header titulo="usuarios"></app-header>
+<app-header titulo="hospitales"></app-header>
 
-<ion-content [fullscreen]="true" class="animated fadeIn">
+<ion-content>
 
     <!--Baraa de busqueda-->
-    <ion-searchbar placeholder="Buscar materiales!" class="ion-no-border" (ionChange)="buscarUsuario($event.detail.value)" debounce="700">
+    <ion-searchbar placeholder="Buscar materiales!" class="ion-no-border" (ionChange)="buscarHospital($event.detail.value)" debounce="700">
     </ion-searchbar>
 
     <!--Spinner-->
@@ -21,32 +21,24 @@
     <ion-list #lista class="animated fadeIn" *ngIf="!cargando">
         <!-- Refresher -->
 
-        <ion-item-sliding *ngFor="let usuario of usuarios">
+        <ion-item-sliding *ngFor="let hospital of hospitales">
 
             <ion-item line="none">
-                <img (click)="subirFoto()" class="img" [src]="usuario.img| imagen" alt="" class="img-50 img-circle">
+                <img class="img" [src]="hospital.img| imagen:'hospital'" alt="" class="img-50 img-circle">
                 <!--<ion-label (click)="verUsuario(usuario)" *ngIf="usuario.role === 'ADMIN_ROLE'" class="ion-text-right">Admin</ion-label>
                 <ion-label (click)="verUsuario(usuario)" *ngIf="usuario.role === 'USER_ROLE'" class="ion-text-right">Regular</ion-label> -->
-                <ion-label (click)="verUsuario(usuario)" class="ion-text-left">{{usuario.nombre}}</ion-label>
-
-                <ion-item side="end">
-                    <select [(ngModel)]="usuario.role" name="role" class="form-control">
-                        <option value="ADMIN_ROLE">Admin</option>
-                        <option value="USER_ROLE">Regular</option>
-                    </select>
-
-                </ion-item>
+                <ion-label (click)="verHospital(hospital)" class="ion-text-left">{{hospital.nombre}}</ion-label>
             </ion-item>
 
             <ion-item-options side="start" class="boton_izq">
                 <ion-item-option color="primary">
-                    <ion-icon (click)="actualizarUsuario(usuario)" slot="icon-only" name="browsers-outline"></ion-icon>
+                    <ion-icon (click)="actualizarHospital(hospital)" slot="icon-only" name="browsers-outline"></ion-icon>
                 </ion-item-option>
             </ion-item-options>
 
             <ion-item-options side="end" class="boton_der">
                 <ion-item-option color="danger">
-                    <ion-icon (click)="eliminarUsuario(usuario)" slot="icon-only" name="trash-outline"></ion-icon>
+                    <ion-icon (click)="eliminarHospital(hospital)" slot="icon-only" name="trash-outline"></ion-icon>
                 </ion-item-option>
             </ion-item-options>
 
@@ -80,7 +72,7 @@
     <!-- fab placed to the bottom end -->
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
         <ion-fab-button>
-            <ion-icon (click)="crearUsuario()" name="add"></ion-icon>
+            <ion-icon (click)="crearHospital()" name="add"></ion-icon>
         </ion-fab-button>
     </ion-fab>
 
