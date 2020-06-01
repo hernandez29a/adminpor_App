@@ -2,20 +2,30 @@
 
     <ion-label class="ion-text-center">
         <h1 class="bajarTitulo">
-            <ion-text color="dark">{{hospital.nombre}}</ion-text>
+            <ion-text color="dark">{{medico.nombre}}</ion-text>
         </h1>
     </ion-label>
 
     <ion-row class="ion-text-center">
         <ion-col>
-            <img [src]="hospital.img| imagen:'hospital'" class="rounded img-fluid">
+            <img [src]="medico.img| imagen:'medico'" class="rounded img-fluid">
         </ion-col>
     </ion-row>
 
+    <ion-label class="ion-text-center">
+        <h1 class="bajarTitulo">
+            <ion-text color="dark">{{medico.hospital.nombre}}</ion-text>
+        </h1>
+    </ion-label>
 
-
+    <ion-row class="ion-text-center">
+        <ion-col>
+            <img [src]="medico.hospital.img| imagen:'hospital'" class="rounded img-fluid">
+        </ion-col>
+    </ion-row>
 
 </ion-content>
+
 
 <ion-footer class="ion-no-border">
     <ion-toolbar>

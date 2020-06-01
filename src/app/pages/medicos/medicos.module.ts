@@ -8,6 +8,7 @@ import { MedicosPageRoutingModule } from './medicos-routing.module';
 
 import { MedicosPage } from './medicos.page';
 import { ComponentesModule } from '../../componentes/componentes.module';
+import { PipesModule } from '../../pipes/pipes.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { ComponentesModule } from '../../componentes/componentes.module';
     FormsModule,
     IonicModule,
     MedicosPageRoutingModule,
-    ComponentesModule
+    ComponentesModule,
+    PipesModule
   ],
   declarations: [MedicosPage]
 })

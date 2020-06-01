@@ -8,6 +8,7 @@ import { DetalleHospitalComponent } from './hospital/detalle-hospital/detalle-ho
 import { HospitalCrearComponent } from './hospital/hospital-crear/hospital-crear.component';
 import { HospitalActualizarComponent } from './hospital/hospital-actualizar/hospital-actualizar.component';
 import { FormsModule } from '@angular/forms';
+import { DetalleMedicoComponent } from './medico/detalle-medico/detalle-medico.component';
 
 
 
@@ -17,13 +18,15 @@ import { FormsModule } from '@angular/forms';
     DetalleUsuarioComponent,
     DetalleHospitalComponent,
     HospitalCrearComponent,
-    HospitalActualizarComponent
+    HospitalActualizarComponent,
+    DetalleMedicoComponent
     
   ],
   declarations: [
     HeaderComponent,
     DetalleUsuarioComponent,
     DetalleHospitalComponent,
+    DetalleMedicoComponent,
     HospitalCrearComponent,
     HospitalActualizarComponent
     
@@ -32,6 +35,7 @@ import { FormsModule } from '@angular/forms';
     HeaderComponent,
     DetalleUsuarioComponent,
     DetalleHospitalComponent,
+    DetalleMedicoComponent,
     HospitalCrearComponent,
     HospitalActualizarComponent
     

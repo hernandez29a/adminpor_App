@@ -27,3 +27,17 @@ export interface Usuario {
     usuario?: Usuario;
     img?: string;
   }
+
+  export interface RespuestaMedicos {
+    ok: boolean;
+    medicos: Medico[];
+    total: number;
+  }
+  
+  export interface Medico {
+    _id?: string;
+    nombre?: string;
+    usuario?: any;
+    hospital?: Hospital;
+    img?: string;
+  }
