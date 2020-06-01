@@ -24,7 +24,7 @@
         <ion-item-sliding *ngFor="let hospital of hospitales">
 
             <ion-item line="none">
-                <img class="img" [src]="hospital.img| imagen:'hospital'" alt="" class="img-50 img-circle">
+                <img class="img" [src]="hospital.img| imagen:'hospital'" alt="" class="img-50 rounded img-fluid">
                 <!--<ion-label (click)="verUsuario(usuario)" *ngIf="usuario.role === 'ADMIN_ROLE'" class="ion-text-right">Admin</ion-label>
                 <ion-label (click)="verUsuario(usuario)" *ngIf="usuario.role === 'USER_ROLE'" class="ion-text-right">Regular</ion-label> -->
                 <ion-label (click)="verHospital(hospital)" class="ion-text-left">{{hospital.nombre}}</ion-label>

@@ -1,0 +1,42 @@
+<ion-content [fullscreen]="true">
+
+    <form (ngSubmit)="crearHospital( fCrear.value )" #fCrear="ngForm">
+        <ion-row>
+            <ion-col>
+
+                <ion-list>
+
+
+                    <ion-item>
+                        <ion-label>Nombre</ion-label>
+                        <ion-input [(ngModel)]="hospital.nombre" class="form-control" name="nombre" type="text" placeholder="coloque el nombre del Hospital" required></ion-input>
+                    </ion-item>
+
+                </ion-list>
+            </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-text-center">
+            <ion-col>
+                <ion-button type="submit" color="tertiary" shape="round">
+                    Guardar Hospital
+                </ion-button>
+            </ion-col>
+        </ion-row>
+
+    </form>
+
+
+</ion-content>
+
+<ion-footer class="ion-no-border">
+    <ion-toolbar>
+
+        <ion-buttons slot="start">
+            <ion-button (click)="regresar()">
+                <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
+                <ion-label>Regresar</ion-label>
+            </ion-button>
+        </ion-buttons>
+
+    </ion-toolbar>

@@ -4,7 +4,7 @@ import { NavController } from '@ionic/angular';
 import { UsuariosService } from './usuarios.service';
 import { environment } from '../../environments/environment';
 import { RespuestaHospitales, Hospital } from '../interfaces/interfaces';
-import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer/ngx';
+import { FileTransfer, FileTransferObject, FileUploadOptions } from '@ionic-native/file-transfer/ngx';
 import { map } from 'rxjs/operators';
 import Swal from 'sweetalert2'
 import { catchError } from "rxjs/operators";
@@ -39,12 +39,16 @@ cargarHospital( desde: number = 0){
           
 }
 
-subirImagen(img:string, id:string = null){
+//=============================
+//Guardar la imagen del hospital
+//=============================
+
+subirImagen(img:string, id:string ){
 
   console.log('la imagen es:',img);
   console.log( 'el id del usuario es',id);
-  id = this.hospital._id;
-  let url = URL_SERVICIOS + '/upload/usuarios/' + id;
+  //id = this.hospital._id;
+  let url = URL_SERVICIOS + '/upload/hospitales/' + id;
   const options: FileUploadOptions = {
     fileKey: 'imagen' 
   }
@@ -64,7 +68,8 @@ subirImagen(img:string, id:string = null){
 //=============================
 crearHospital(hospital:Hospital){
     
-  let url = URL_SERVICIOS + '/hoapital';
+  let url = URL_SERVICIOS + '/hospital';
+  url += '?token='  + this._usuarioService.token;
   
   //se envia al url los datos del usuario para crear el mismo
   return this.http.post(url, hospital)
@@ -84,7 +89,20 @@ crearHospital(hospital:Hospital){
 //=============================
 //Actualizar hospital
 //=============================
+actualizarHospital(hospital:Hospital){
+    
+  let url = URL_SERVICIOS + '/hospital/' + hospital._id;
+  url += '?token=' + this._usuarioService.token;
 
+
+  return this.http.put( url,hospital)
+  .pipe(
+    map((resp: any) => {
+      Swal.fire({ title: 'Hospital actualizado', text: hospital.nombre, icon: 'success' });
+      return resp.hospital;
+    })
+  );
+}
 
 //=============================
 //Buscar hospital

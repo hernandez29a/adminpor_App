@@ -3,8 +3,9 @@ import { Hospital } from '../../interfaces/interfaces';
 import { IonList, ModalController } from '@ionic/angular';
 import { HospitalesService } from '../../services/hospitales.service';
 import Swal from 'sweetalert2';
-import { DetalleUsuarioComponent } from '../../componentes/usuario/detalle-usuario/detalle-usuario.component';
 import { DetalleHospitalComponent } from 'src/app/componentes/hospital/detalle-hospital/detalle-hospital.component';
+import { HospitalCrearComponent } from '../../componentes/hospital/hospital-crear/hospital-crear.component';
+import { HospitalActualizarComponent } from 'src/app/componentes/hospital/hospital-actualizar/hospital-actualizar.component';
 
 
 @Component({
@@ -60,8 +61,18 @@ export class HospitalesPage implements OnInit {
     this.cargarHospitales();
   }
 
-  crearHospital(){
+  async crearHospital(){
+   
+    const modal = await this.modalCtrl.create({
+      component: HospitalCrearComponent
 
+    });
+
+    modal.onDidDismiss().then( () => {
+      this.cargarHospitales();
+    });
+
+    modal.present();
   }
 
   buscarHospital(termino:string){
@@ -87,7 +98,7 @@ export class HospitalesPage implements OnInit {
 
   async verHospital(hospital:Hospital){
   
-    console.log(hospital);
+    //console.log(hospital);
 
     const modal = await this.modalCtrl.create({
       component:DetalleHospitalComponent,
@@ -99,8 +110,23 @@ export class HospitalesPage implements OnInit {
     modal.present();
   }
 
-  actualizarHospital(hospital:Hospital){
+  async actualizarHospital(hospital:Hospital){
+    console.log(hospital);
+    this.lista.closeSlidingItems();
 
+    const modal = await this.modalCtrl.create({
+      component: HospitalActualizarComponent,
+      componentProps:{
+        hospital
+      }
+    });
+
+    modal.onDidDismiss().then( () => {
+      this.cargarHospitales();
+    });
+
+    modal.present();
+   
   }
 
   eliminarHospital(hospital:Hospital){

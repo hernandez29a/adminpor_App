@@ -5,28 +5,42 @@ import { HeaderComponent } from './header/header.component';
 import { DetalleUsuarioComponent } from './usuario/detalle-usuario/detalle-usuario.component';
 import { PipesModule } from '../pipes/pipes.module';
 import { DetalleHospitalComponent } from './hospital/detalle-hospital/detalle-hospital.component';
+import { HospitalCrearComponent } from './hospital/hospital-crear/hospital-crear.component';
+import { HospitalActualizarComponent } from './hospital/hospital-actualizar/hospital-actualizar.component';
+import { FormsModule } from '@angular/forms';
+
 
 
 
 @NgModule({
   entryComponents:[
     DetalleUsuarioComponent,
-    DetalleHospitalComponent
+    DetalleHospitalComponent,
+    HospitalCrearComponent,
+    HospitalActualizarComponent
+    
   ],
   declarations: [
     HeaderComponent,
     DetalleUsuarioComponent,
-    DetalleHospitalComponent
+    DetalleHospitalComponent,
+    HospitalCrearComponent,
+    HospitalActualizarComponent
+    
   ],
   exports:[
     HeaderComponent,
     DetalleUsuarioComponent,
-    DetalleHospitalComponent
+    DetalleHospitalComponent,
+    HospitalCrearComponent,
+    HospitalActualizarComponent
+    
   ],
   imports: [
     CommonModule,
     IonicModule,
-    PipesModule
+    PipesModule,
+    FormsModule
   ]
 })
 export class ComponentesModule { }
