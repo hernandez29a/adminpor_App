@@ -5,6 +5,8 @@ import { Medico } from '../../interfaces/interfaces';
 import Swal from 'sweetalert2';
 import { async } from '@angular/core/testing';
 import { DetalleMedicoComponent } from '../../componentes/medico/detalle-medico/detalle-medico.component';
+import { MedicoCrearComponent } from '../../componentes/medico/medico-crear/medico-crear.component';
+import { MedicoActualizarComponent } from '../../componentes/medico/medico-actualizar/medico-actualizar.component';
 
 @Component({
   selector: 'app-medicos',
@@ -44,7 +46,7 @@ export class MedicosPage implements OnInit {
   }
 
   async verMedico(medico){
-    console.log(medico);
+   // console.log(medico);
 
     const modal = await this.modalCtrl.create({
       component:DetalleMedicoComponent,
@@ -72,12 +74,35 @@ export class MedicosPage implements OnInit {
     this.cargarMedicos();
   }
 
-  crearMedico(){
+  async crearMedico(){
+
+    const modal = await this.modalCtrl.create({
+      component:MedicoCrearComponent
+    });
+
+    modal.onDidDismiss().then( () => {
+      this.cargarMedicos();
+    });
+
+    modal.present();
     
   }
 
-  actualizarMedico(medico){
-    console.log(medico);
+  async actualizarMedico(medico){
+    //console.log(medico);
+
+    const modal = await this.modalCtrl.create({
+      component:MedicoActualizarComponent,
+      componentProps:{
+        medico
+      }
+    });
+
+    modal.onDidDismiss().then( () => {
+      this.cargarMedicos();
+    });
+
+    modal.present();
   }
 
   buscarMedico(termino:string){

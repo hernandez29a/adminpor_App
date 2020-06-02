@@ -9,6 +9,8 @@ import { HospitalCrearComponent } from './hospital/hospital-crear/hospital-crear
 import { HospitalActualizarComponent } from './hospital/hospital-actualizar/hospital-actualizar.component';
 import { FormsModule } from '@angular/forms';
 import { DetalleMedicoComponent } from './medico/detalle-medico/detalle-medico.component';
+import { MedicoCrearComponent } from './medico/medico-crear/medico-crear.component';
+import { MedicoActualizarComponent } from './medico/medico-actualizar/medico-actualizar.component';
 
 
 
@@ -16,9 +18,11 @@ import { DetalleMedicoComponent } from './medico/detalle-medico/detalle-medico.c
 @NgModule({
   entryComponents:[
     DetalleUsuarioComponent,
-    DetalleHospitalComponent,
     HospitalCrearComponent,
     HospitalActualizarComponent,
+    DetalleHospitalComponent,
+    MedicoCrearComponent,
+    MedicoActualizarComponent,
     DetalleMedicoComponent
     
   ],
@@ -26,18 +30,22 @@ import { DetalleMedicoComponent } from './medico/detalle-medico/detalle-medico.c
     HeaderComponent,
     DetalleUsuarioComponent,
     DetalleHospitalComponent,
-    DetalleMedicoComponent,
     HospitalCrearComponent,
-    HospitalActualizarComponent
+    HospitalActualizarComponent,
+    DetalleMedicoComponent,
+    MedicoCrearComponent,
+    MedicoActualizarComponent
     
   ],
   exports:[
     HeaderComponent,
     DetalleUsuarioComponent,
     DetalleHospitalComponent,
-    DetalleMedicoComponent,
     HospitalCrearComponent,
-    HospitalActualizarComponent
+    HospitalActualizarComponent,
+    MedicoCrearComponent,
+    MedicoActualizarComponent,
+    DetalleMedicoComponent
     
   ],
   imports: [
